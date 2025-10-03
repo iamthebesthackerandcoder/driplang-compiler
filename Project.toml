@@ -1,5 +1,12 @@
+name = "DripLangCompiler"
+uuid = "53511112-e4bc-4ed1-9812-f6ca28d094c3"
+authors = ["DripLang contributors"]
+version = "0.2.0"
+
 [deps]
 ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
+Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
 LoggingExtras = "e6f89c97-d47a-5376-807f-9c37f3926c36"
+PackageCompiler = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
 PrecompileTools = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
 Tokenize = "0796e94c-ce3b-5d07-9a54-7f471281c624"

@@ -1,0 +1,4 @@
+name = "DripStd"
+uuid = "5ee1e101-ae38-4c99-8f3d-abda41b0c1ce"
+authors = ["DripLang contributors"]
+version = "0.1.0"

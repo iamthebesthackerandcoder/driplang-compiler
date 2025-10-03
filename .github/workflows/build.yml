@@ -1,0 +1,63 @@
+name: Build Apps
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            shell: bash
+            artifact: drip-linux-x86_64
+            archive: drip-linux-x86_64.tar.gz
+          - os: macos-latest
+            shell: bash
+            artifact: drip-macos-x86_64
+            archive: drip-macos-x86_64.tar.gz
+          - os: windows-latest
+            shell: pwsh
+            artifact: drip-windows-x86_64
+            archive: drip-windows-x86_64.zip
+    env:
+      JULIA_VERSION: '1.10'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: ${{ env.JULIA_VERSION }}
+      - name: Instantiate project
+        run: julia --project=. -e 'using Pkg; Pkg.instantiate()'
+        shell: ${{ matrix.shell }}
+      - name: Build application
+        env:
+          DRIP_BUILD_OUTPUT: ${{ github.workspace }}/build/${{ matrix.artifact }}
+        run: julia scripts/build_app.jl
+        shell: ${{ matrix.shell }}
+      - name: Prepare dist directory
+        run: |
+          mkdir dist
+        shell: ${{ matrix.shell }}
+      - name: Package artifact (unix)
+        if: matrix.os != 'windows-latest'
+        run: |
+          cd build/${{ matrix.artifact }}
+          tar -czf ../../dist/${{ matrix.archive }} *
+        shell: ${{ matrix.shell }}
+      - name: Package artifact (windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Compress-Archive -Path "build\${{ matrix.artifact }}\*" -DestinationPath "dist\${{ matrix.archive }}"
+        shell: ${{ matrix.shell }}
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist/${{ matrix.archive }}

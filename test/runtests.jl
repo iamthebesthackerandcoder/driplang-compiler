@@ -1,3 +1,5 @@
+﻿include(joinpath(@__DIR__, "..", "src", "DripLangCompiler.jl"))
+
 using Test
 using .DripLangCompiler
 using .DripLangCompiler.Lexer
@@ -38,4 +40,25 @@ end
     compiled = DripLangCompiler.compile_string(sample_source; file="<runtime>")
     result = Runtime.run(compiled; entrypoint=:main)
     @test result == 6
+end
+
+stdlib_source = """
+plug DripStd
+
+flex main()
+    numbers = [1, 2, 3, 4]
+    vibe_check(length(numbers) == 4)
+    total = drip_sum(numbers)
+    avg = drip_mean(numbers)
+    groups = group_chat(x glow x % 2, numbers)
+    vibe_check(haskey(groups, 0))
+    spill("avg", avg)
+    bounce total
+yeet
+"""
+
+@testset "Stdlib" begin
+    compiled = DripLangCompiler.compile_string(stdlib_source; file="<stdlib>", precompile_methods=false)
+    result = Runtime.run(compiled; entrypoint=:main)
+    @test result == 10
 end
