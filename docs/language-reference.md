@@ -1,3 +1,9 @@
+---
+layout: default
+title: Language Reference
+nav_order: 3
+---
+
 # Language Reference
 
 DripLang mirrors Julia's syntax and semantics while swapping every reserved keyword for Gen Z slang. The compiler remaps tokens back to Julia before invoking `Meta.parseall`, so any valid DripLang program becomes valid Julia at the lowered AST level.

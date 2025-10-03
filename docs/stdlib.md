@@ -1,3 +1,9 @@
+---
+layout: default
+title: Standard Library
+nav_order: 4
+---
+
 # DripStd Standard Library
 
 DripStd ships as a Julia package in `stdlib/DripStd`. Any DripLang program can bring it into scope with:

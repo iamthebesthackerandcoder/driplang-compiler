@@ -1,3 +1,9 @@
+---
+layout: default
+title: Tooling & Workflow
+nav_order: 5
+---
+
 # Tooling & Workflow
 
 ## CLI Commands

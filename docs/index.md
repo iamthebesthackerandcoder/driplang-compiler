@@ -1,3 +1,10 @@
+---
+layout: default
+title: Welcome to DripLang
+nav_order: 1
+description: Overview of the DripLang language, tooling, and community links.
+---
+
 # Welcome to DripLang
 
 DripLang is a Julia-powered programming language that swaps the classic keywords for Gen Z slang while keeping Julia's multiple dispatch, performance, and expressive power. The compiler translates `.drip` sources to Julia IR, so your programs get instant JIT compilation and access to the rich Julia ecosystem.
