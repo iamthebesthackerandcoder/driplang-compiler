@@ -1,0 +1,14 @@
+plug Statistics
+
+flex sum_numbers(vals::Vector{Int})
+    total = 0
+    loopin v vibein vals
+        total += v
+    yeet
+    bounce total
+yeet
+
+flex main()
+    println("sum is", sum_numbers([1,2,3,4]))
+    bounce nothing
+yeet

@@ -1,0 +1,5 @@
+[deps]
+ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
+LoggingExtras = "e6f89c97-d47a-5376-807f-9c37f3926c36"
+PrecompileTools = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
+Tokenize = "0796e94c-ce3b-5d07-9a54-7f471281c624"
